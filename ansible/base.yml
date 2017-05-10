@@ -88,7 +88,7 @@
             - libxext6
             - xfonts-75dpi
             - xfonts-base
-            - nodejs
+            # - nodejs
             - npm
             - libtiff5-dev
             - libjpeg8-dev
