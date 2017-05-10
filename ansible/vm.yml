@@ -2,7 +2,7 @@
 - include: base.yml
 - name: Clone bench
   hosts: all
-  user: "{{ frappe_user }}"
+  user: "strella"
   tasks:
       - git:
           repo=https://github.com/frappe/bench
