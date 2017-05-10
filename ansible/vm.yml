@@ -6,7 +6,7 @@
   tasks:
       - git:
           repo=https://github.com/frappe/bench
-          dest=/home/frappe/bench-repo
+          dest=/home/strella/bench-repo
   tags:
     - bench_install
 
@@ -17,7 +17,7 @@
   tasks:
 
       - easy_install: name=pip executable=easy_install-2.7
-      - pip:          name=/home/frappe/bench-repo extra_args='-e'
+      - pip:          name=/home/strella/bench-repo extra_args='-e'
   tags:
     - bench_install
 
@@ -25,21 +25,21 @@
 - name: Setup bench
   hosts: all
   become: yes
-  become_user: "{{ frappe_user }}"
+  become_user: "strella"
   become_method: sudo
   gather_facts: false
   tasks:
     - bench:
-        path: /home/frappe/frappe-bench
-        frappe_branch: "{{ branch }}"
+        path: /home/strella/frappe-bench
+        frappe_branch: "master"
         apps:
           - name: erpnext
             url: https://github.com/frappe/erpnext
-            branch: "{{ branch }}"
+            branch: "master"
           - name: erpnext_demo
             url: https://github.com/frappe/erpnext_demo
-            branch: "{{ branch }}"
-        mariadb_root_password: "{{ mysql_root_password }}"
+            branch: "master"
+        mariadb_root_password: "frappe"
         sites:
           - name: erpnext.vm
             admin_password: "{{ admin_password or 'admin' }}"
@@ -54,17 +54,17 @@
   become_user: root
   become_method: sudo
   vars:
-   - branch: "{{ branch }}"
+   - branch: "production"
   tasks:
-    - shell: "bench setup sudoers {{ frappe_user }}"
+    - shell: "bench setup sudoers strella"
       args:
-        chdir: "/home/{{ frappe_user }}/frappe-bench"
-        creates: "/home/{{ frappe_user }}/frappe-bench/config/supervisor.conf"
+        chdir: "/home/strella/frappe-bench"
+        creates: "/home/strella/frappe-bench/config/supervisor.conf"
       when: branch == "master"
-    - shell: "bench setup production {{ frappe_user }}"
+    - shell: "bench setup production strella"
       args:
-        chdir: "/home/{{ frappe_user }}/frappe-bench"
-        creates: "/home/{{ frappe_user }}/frappe-bench/config/supervisor.conf"
+        chdir: "/home/strella/frappe-bench"
+        creates: "/home/strella/frappe-bench/config/supervisor.conf"
       when: branch == "master"
-    - file: path="/home/{{ frappe_user }}/frappe-bench/logs/" recurse=yes owner="{{ frappe_user }}"
+    - file: path="/home/strella/frappe-bench/logs/" recurse=yes owner="strella"
       when: branch == "master"
