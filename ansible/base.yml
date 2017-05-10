@@ -100,5 +100,5 @@
             - tk8.6-dev
             - python-tk
           when: ansible_os_family == 'Debian'
-        - user: name="{{ frappe_user }}"
+        - user: name="strella"
         
