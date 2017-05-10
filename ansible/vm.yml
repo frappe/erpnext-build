@@ -42,7 +42,7 @@
         mariadb_root_password: "frappe"
         sites:
           - name: erpnext.vm
-            admin_password: "{{ admin_password or 'admin' }}"
+            admin_password: "admin"
             apps:
               - erpnext
   tags:
