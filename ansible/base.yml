@@ -1,5 +1,5 @@
 ---
-  - name: Apply basic roles  
+  - name: Apply basic roles
     hosts: all
     become: yes
     become_user: root
@@ -89,7 +89,7 @@
             - xfonts-75dpi
             - xfonts-base
             # - nodejs
-            # - npm
+            - npm
             - libtiff5-dev
             - libjpeg8-dev
             - zlib1g-dev
@@ -101,4 +101,3 @@
             - python-tk
           when: ansible_os_family == 'Debian'
         - user: name="strella"
-        
