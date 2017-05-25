@@ -3,6 +3,9 @@
 - name: Clone bench
   hosts: all
   user: "strella"
+  pre_tasks:
+    - name: 'install python2'
+      raw: sudo apt-get -y install python-simplejson
   tasks:
       - git:
           repo=https://github.com/frappe/bench
